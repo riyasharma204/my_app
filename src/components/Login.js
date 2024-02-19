@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useNotify, useLogin } from "react";
 import { TextField, Typography, Button, Box,Popover } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
+import axios from "axios";
+
 
 
 const Login = () => {
   const navigate = useNavigate();
+  const { updateToken } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [open, setOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
+  
    
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    
     setEmailError(false);
     setPasswordError(false);
 
@@ -26,10 +32,20 @@ const Login = () => {
     }
 
     if (email && password) {
-      console.log(email, password);
-      navigate("/Appbar");
-      setOpen(true);
-      setLoginOpen(true);
+      try {
+        // const response = await axios.post("your-login-endpoint", {
+        //   email,
+        //   password,
+        // });
+        // const token = response.data.token;
+        const token =  "efnrgjtnhg";
+        updateToken(token);
+        // setToken( localStorage.setItem("token", token));
+        navigate("/Appbar");
+      } catch (error) {
+        // Handle login error
+        console.error("Login failed", error);
+      }
     }
   };
    

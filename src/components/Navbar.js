@@ -18,6 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
 import "../App.css";
 
 function Navbar() {
@@ -25,7 +26,8 @@ function Navbar() {
   const [userEmail, setUserEmail] = React.useState("");
   const [loginOpen, setLoginOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const { user, logout, token } = useAuth();
+  
   // const handleClose = () => {
   //   setLoginOpen(false);
   // };
@@ -87,6 +89,11 @@ function Navbar() {
               </Box>
             </Drawer>
           </Box>
+          {token ? (
+            <Button color="inherit" onClick={logout}>
+              Logout
+             </Button>
+          ) : ( 
 
           <Link to="/Login" style={{ color: "inherit" }}>
             <div>
@@ -122,6 +129,7 @@ function Navbar() {
               </Popover>
             </div>
           </Link>
+          )}
         </Toolbar>
       </AppBar>
     </React.Fragment>

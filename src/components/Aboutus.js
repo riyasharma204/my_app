@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
      Grid,
      Card,
@@ -6,12 +6,26 @@ import {
      Button
   } from "@mui/material";
   import { useNavigate } from "react-router-dom";
+  import { useAuth } from "./AuthProvider";
 
 function Aboutus() {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    // const {token }= useAuth();
+    //  useEffect(()=>{
+
+    // if (!token){
+    //   navigate("/Login");
+    // }
+
+    //  },[])
+
+    
+
     const handleSubmit = () => {
         navigate('/Appbar');
     }
+
+   
   return (
     <React.Fragment>
          <Grid
